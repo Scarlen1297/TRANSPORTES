@@ -1,0 +1,295 @@
+---
+classoption: "runningheads"
+title: "Demanda de Cerveza en Australia"
+shorttitle: "Short title"
+# If the paper title is too long for the 
+# running head, you can set an abbreviated 
+# paper title here.
+# shorttitle: "Abbreviated paper title"
+authors: 
+  - name: "Scarlen Lobaton"
+    inst: "1"
+    orcid: 
+  - name: "Gustavo Jemio"
+    inst: "2"
+    orcid: 
+  - name: "Noelia Baina"
+    inst: "3"
+    orcid: 
+  - name: "Alejandra Rubín de Celis"
+    inst: "4"
+    orcid: 
+# First names are abbreviated in the running head.
+# If there are more than two authors, 'et al.' is used.
+authorrunning: "F. Author et al." 
+institutes: 
+  - name: "Cossmil, Av. Camcho #1324, La Paz, Bolivia"
+    email: "calen1297@gmail.com"
+  - name: "Laboratorios Cofar S.A., Calle Victor Eduardo # 2293, La Paz, Bolivia"
+    email: "gus.jemio@gmail.com"
+    url: 
+  - name: "Universidad Catolica Boliviana San Pablo, Av. 14 de septiembre # 4807, La Paz, Bolivia"
+    email: "noebe1231196@gmail.com"
+  - name: "Centro de distribución El Alto CBN, Av. 6 de marzo, El Alto, Bolivia"
+    email: "alerubindecelisr@gmail.com"
+abstract: | 
+  Arima is a very popular model for scenario simulation and forecasting for technology-based companies, it is flexible and ideal for working with models with seasonal variations based on historical data information that is not related to the innovative product, but is complementary or substitute. Especially to make predictions on future scenarios.
+  In this article we perform the applicability of the ARIMA method to obtain a time series forecast based on beer demand datasets in Australia.
+  Our results suggest that the ARIMA model parameters can be used as a predictive model to forecast future values of time series.
+  By adjusting the ARIMA model, the study shows that the demand for beer shows continuous growth without finding negative deviations that could impact future forecasts.
+  
+  Arima es modelo muy popular para simulado y pronóstico de escenarios para empresas de base tecnológica, es flexible e ideal para trabajar modelos con variaciones estacionales a partir de información histórica de datos que no son relativos al producto innovador, pero que sí son complementarios o sustitutos. Especialmente para hacer predicciones en los escenarios futuros. 
+  En este artículo realizamos la aplicabilidad del método ARIMA para obtener un pronóstico de series temporales en base a datasets de la demanda de cerveza en Australia.
+  Nuestros resultados sugieren que los parámetros del modelo ARIMA se pueden usar como un modelo predictivo para hacer pronósticos de valores futuros de las series temporales
+  Al ajustar el modelo ARIMA, el estudio demuestra que la demanda de cerveza muestra un crecimiento continuo sin encontrar desviaciones negativas que puedan impactar los pronósticos futuros.
+keywords: 
+  - beer supply chain datasets
+  - Supply Chain
+  - Datasets
+bibliography: lncs-test.bib
+# Use csl when using default citation_package for Pandoc citeproc
+csl: https://www.zotero.org/styles/springer-lecture-notes-in-computer-science
+# citations with arabic numbers is prefered when using natbib
+natbiboptions: numbers
+
+output: 
+  rticles::lncs_article:
+    citation_package: default # or natbib
+---
+
+# Introducción
+Se estudiará el caso de un producto con fuerte demanda estacional. En nuestro caso la demanda de cerveza en Australia.
+
+Se comenzará modelando los datos de una serie temporal. Usando R, convertiremos los datos disponibles en formato de datos de serie temporal.
+
+ARIMA es una técnica básica para el pronóstico de series de tiempo complejas, basado en inteligencia artificial. Si son series estacionales se usa S-ARIMA (Seasonal). Este artículo provee una descripción paso a paso para hacer el ajuste y parametrización de la biblioteca arima usando R.
+
+## Estado del arte
+
+Realizamos una busqueda en google académico con las siguientes palabras clave:
+
+* beer supply chain datasets
+* supply chain
+* datasets
+
+El resultado nos dio 24500 artículos
+
+De la revisión de los más interesantes seleccionamos por la lectura del título solamente los siguientes artículos
+
+Carbonneau, R., Laframboise, K., & Vahidov, R. (2008). Application of machine learning techniques for supply chain demand forecasting. European Journal of Operational Research, 184(3), 1140-1154.
+
+Fu, G., Shen, S., Zhao, L., Liu, Q., & Li, W. (2013, December). Effective tracking and tracing in rfid-enabled supply chain networks. In Proceedings 2013 International Conference on Mechatronic Sciences, Electric Engineering and Computer (MEC) (pp. 2310-2315). IEEE.
+
+Mircetic, D., Rostami-Tabar, B., Nikolicic, S., & Maslaric, M. (2022). Forecasting hierarchical time series in supply chains: an empirical investigation. International Journal of Production Research, 60(8), 2514-2533.
+
+Luego de haber revisado estos artículos hemos incluido las siguientes palabras a las palabras claves:
+
+* beer supply chain datasets
+* supply chain
+* datasets
+* Neural net
+
+Al revisar los artículos destacados podemos comentar lo siguiente de cada uno de ellos:
+
+## Application of machine learning techniques for supply chain demand forecasting
+Este artículo hace referencia a la investigación de la aplicabilidad de la tecnología avanzada en técnicas de aprendizaje automático, incluidas redes neuronales, redes neuronales recurrentes y máquinas de vectores de soporte, para pronosticar una demanda distorsionada al final de una cadena de suministro (efecto látigo). Los hallazgos sugieren que, si bien las redes neuronales recurrentes y las máquinas de vectores de soporte muestran el mejor rendimiento, la precisión del pronóstico no fue estadísticamente significativamente mejor que la del modelo de regresión
+
+## Effective tracking and tracing in rfid-enabled supply chain networks
+Este artículo hace referencia a que una red de cadena de suministro habilitada para RFID facilita el rastreo y seguimiento de etiquetas mediante el intercambio de datos en infraestructuras de servicios de información (IS) o servicios de descubrimiento (DS), a lo largo de todo el ciclo de vida de una etiqueta. EPCGlobal es un estándar ampliamente aplicado para una red de cadena de suministro habilitada para RFID, que define la gestión del ciclo de vida de una etiqueta EPC, al describir los problemas de seguimiento y rastreo en una red EPCGlobal. Sin embargo, los algoritmos de rastreo y rastreo existentes no consideran eventos complicados definidos en los estándares EPCGlobal, como agregación, desagregación, recuperación, comentario, etc. y rastreo en el contexto de eventos complicados.
+
+
+## Forecasting hierarchical time series in supply chains: an empirical investigation
+En este artículo, se investiga el desempeño de los pronóstico de combinación óptima, ascendente y descendente en una cadena de suministro. Primero se evalua su rendimiento mediante un estudio de simulación y una investigación empírica en una red de distribución. Luego, se examina la precisión del pronóstico de combinar pronósticos de estos enfoques. Los resultados revelan que las combinaciones de pronósticos producen pronósticos que son más precisos y menos sesgados que los enfoques individuales.
+
+
+# Justificación 
+
+Realizamos este trabajo para poder conocer más el método ARIMA, ya que es un modelo predictivo que permite hacer pronósticos de valores futuros de las series temporales, por esta razón, como la cerveza tiene etapas en las que su venta varía, se realizó el análisis y la implementación de este método.
+
+# Materiales y Métodos
+
+## Materiales
+
+Se utilizó el dataset de un caso de productos con fuerte demanda estacional. Se analizará el caso la demanda de cerveza en Australia.
+
+Para llevar a cabo este trabajo se utilizará el método ARIMA.
+ARIMA por sus siglas en inglés , acrónimo del inglés autoregressive integrated moving average , o Modelo autorregresivo integrado de media móvil es muy utilizado en estadística y econometría, en particular en series temporales, un modelo autorregresivo integrado de promedio móvil o simplemente un sistema que se comporta como ARIMA es un modelo estadístico que utiliza variaciones y regresiones de datos estadísticos con el fin de encontrar patrones para una predicción hacia el futuro.
+
+Para llevar a cabo este trabajo, se utilizaron distintos comandos, por ejemplo los siguientes:
+
+
+```{r}
+summary(cars)
+
+```
+```{r}
+plot(iris)
+
+```
+
+## Métodos
+
+El dataset que utilizamos podría ser analizado con KNN o también con una red neuronal, se podrian clasificar los consumos por mes, etc.
+
+Considerando la estructura del dataset que conseguimos hemos optamos por utilizar el método ARIMA.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Consumo de cerveza
+
+Primer paso recuperar los datos
+
+```{r}
+RawData=scan('https://themys.sid.uncu.edu.ar/~rpalma/R-cran/Routers.txt')
+plot(RawData)
+```
+
+```{r}
+RawData=scan('https://themys.sid.uncu.edu.ar/~rpalma/R-cran/Routers.txt')
+plot(RawData, type = "l")
+```
+
+
+```{r}
+tsData = ts(RawData, start = c(2006,1), frequency = 12)
+print(tsData)
+```
+
+```{r}
+plot(tsData)
+```
+
+```{r}
+componentes.ts = decompose(tsData)
+plot(componentes.ts)
+```
+
+```{r}
+library("fUnitRoots")
+urkpssTest(tsData, type = c("tau"), lags = c("short"),use.lag = NULL, doplot = TRUE)
+```
+
+```{r}
+tsstationary = diff(tsData, differences=1)
+plot(tsstationary)
+```
+
+```{r}
+acf(tsstationary, lag.max=140)
+```
+
+```{r}
+fitARIMA <- arima(tsData, order=c(1,1,1),seasonal =list(order = c(1,0,0), period = 12),method="ML")
+#install.packages("lmtest")
+library(lmtest)
+```
+
+```{r}
+coeftest(fitARIMA)
+```
+
+```{r}
+fitARIMA <- arima(tsData, order=c(1,1,1), seasonal =list(order = c(1,0,0), period = 12),method="ML")
+```
+
+```{r}
+confint(fitARIMA)
+```
+
+```{r}
+library(forecast)
+auto.arima(tsData, trace=TRUE)
+```
+
+```{r}
+predict(fitARIMA,n.ahead = 25)
+```
+
+```{r}
+futurVal <- forecast(fitARIMA,h=10, level=c(82.5))
+plot(futurVal)
+```
+
+```{r}
+summary(tsData)
+
+```
+
+```{r}
+boxplot(tsData)
+
+```
+
+```{r}
+hist(tsData, main = "Histograma")
+
+```
+
+
+
+# Interpretación de resultados y conclusiones
+
+Según los resultados obtenidos, se utilizó R para convertir los datos en formato de datos de serie temporal, para poder tener una mejor visualización de los datos, se ajusto el primer gráfico (RawData).
+
+Se puede observar que a inicios de la gestión 2009 y a finales de la gestión 2010 la demanda de la cerveza en Australia sufrió dos bajones en su consumo.
+
+La demanda de la cerveza en Australia comienza con mucha variabilidad y no presenta un patrón al inicio de los datos obtenidos, posteriormente, al realizar los ajustes correspondientes se puede llegar a observar la estacionalidad de los datos, que se van ajustando.
+
+Por otra parte, al realizar el ajuste del modelo se puede observar que el crecimiento de la demanda de cerveza va incrementando y no se genera ninguna eventualidad negativa, que pueda afectar a la demanda en el pronóstico realizado.
+
+Los pronósticos se muestran con una linea azul, con los intervalos de predicción del 82.5% como un área sombreada oscura, y los intervalos de predicción del 95% como un área sombreada clara.
+
+## A Subsection Sample
+
+Please note that the first paragraph of a section or subsection is not indented. 
+The first paragraph that follows a table, figure, equation etc. does not need an indent, either.
+
+Subsequent paragraphs, however, are indented.
+
+### Sample Heading (Third Level)
+
+Only two levels of headings should be numbered. 
+Lower level headings remain unnumbered; they are formatted as run-in headings.
+
+#### Sample Heading (Fourth Level)
+
+The contribution should contain no more than four levels of headings. 
+Table\ \ref{tab:table} gives a summary of all heading levels.
+
+```{r table}
+knitr::kable(head(pressure), 
+             format = "latex",
+             caption = "Table captions should be placed above the tables.")
+```
+
+\noindent Displayed equations are centered and set on a separate line.
+
+\begin{equation}
+x + y = z
+\end{equation}
+
+Please try to avoid rasterized images for line-art diagrams and schemas. 
+Whenever possible, use vector graphics instead (see Fig.\ \ref{fig:fig1}).
+
+```{r fig1, fig.cap = "A figure caption is always placed below the illustration. Please note that short captions are centered, while long ones are justified by the macro package automatically."}
+plot(pressure)
+```
+
+::: {.theorem latex=true}
+This is a sample theorem. The run-in heading is set in bold, while the following text appears in italics. Definitions, lemmas, propositions, and corollaries are styled the same way.
+:::
+
+The environments 'definition', 'lemma', 'proposition', 'corollary', 'remark', and 'example' are defined in the LLNCS documentclass as well.
+
+::: {.proof latex=true}
+Proofs, examples, and remarks have the initial word in italics, while the following text appears in normal font.
+:::
+
+For citations of references, use\ \cite{Nuncio2011}.
+Multiple citations are grouped\ \cite{Levitus2012,Raphael2004}.
+
+### Acknowledgements
+Please place your acknowledgments at the end of the paper, preceded by an unnumbered run-in heading (i.e. 3rd-level heading).
